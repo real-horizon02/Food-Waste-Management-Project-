@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Smart Food - Landing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <!-- Small animation styles (minimal, non-invasive) -->
+  <style>
+    /* Loader overlay */
+    .site-loader {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+
+    .site-loader.loaded {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .loader-video {
+      width: min(80vw, 1200px);
+      max-height: 80vh;
+      border-radius: 12px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+      transform-origin: center;
+      animation: loader-scale 4s ease-in-out infinite;
+      display: block;
+      object-fit: cover;
+    }
+
+    .loader-brand {
+      position: absolute;
+      top: 18px;
+      left: 20px;
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      text-shadow: 0 4px 18px rgba(0, 0, 0, 0.6);
+      font-size: 18px;
+    }
+
+    @keyframes loader-scale {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.02);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    /* Generic small animations used across the page */
+    .will-animate {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 420ms ease, transform 420ms ease;
+    }
+
+    .animated-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* subtle hover pulse for primary CTAs */
+    .cta {
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .cta:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    /* small attention animation for video overlay heading */
+    .video-overlay h2 {
+      transition: transform 480ms ease;
+    }
+
+    .video-overlay.will-animate.animated-in h2 {
+      transform: translateY(-6px);
+    }
+
+    /* nav links appear from right */
+    header.topnav.will-animate {
+      transform: translateY(-6px);
+    }
+
+    header.topnav.animated-in {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* slight fade for quick actions */
+    .quick-actions.will-animate {
+      transition-delay: 0.2s;
+    }
+
+    /* small responsive adjustments for loader on narrow screens */
+    @media (max-width: 520px) {
+      .loader-video {
+        width: 92vw;
+        border-radius: 8px;
+      }
+
+      .loader-brand {
+        font-size: 14px;
+        left: 14px;
+        top: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- LOADER (cooking HD animation via API) -->
+  <div id="site-loader" class="site-loader" aria-hidden="false">
+    <video autoplay muted loop playsinline id="loaderVideo" class="loader-video" poster="">
+      <source id="loaderSource" src="" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="loader-brand">Smart Food</div>
+  </div>
+
+  <div id="landing-shell">
+    <!-- TOP NAV (Login / Register links on top-right) -->
+    <header class="topnav will-animate" role="banner">
+      <div class="brand">Smart Food</div>
+      <nav class="nav-links will-animate">
+        <a href="login.html" class="nav-btn">Login</a>
+        <a href="register.html" class="nav-btn nav-primary">Register</a>
+      </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="hero-section" class="hero-section" aria-label="Hero">
+      <div class="hero-content will-animate">
+        <h1>Welcome to Our Website</h1>
+        <p class="hero-sub">AI-Based Smart Food Waste Management — Smarter kitchens, zero waste.</p>
+        <button id="ctaExplore" class="cta will-animate">Explore</button>
+      </div>
+    </section>
+
+    <!-- VIDEO SECTION -->
+    <section id="video-section" class="video-section" aria-label="Video">
+      <video autoplay muted loop playsinline id="foodVideo" class="food-video" poster="">
+        <source src="videos/2620043-uhd_3840_2160_25fps.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="video-overlay will-animate">
+        <h2>Smarter Kitchens. Zero Waste.</h2>
+        <p class="video-sub">Learn how to plan, scale, and save ingredients with AI-powered grocery lists.</p>
+        <button id="ctaToApp" class="cta cta-alt will-animate">Get Started</button>
+      </div>
+    </section>
+
+    <!-- APP / LOGIN & REGISTER SECTION -->
+    <main class="container" id="app-anchor">
+      <section class="app-intro will-animate">
+        <h3>Ready to manage food smarter?</h3>
+        <p>Sign up to save grocery lists, import recipes, and reduce waste.</p>
+      </section>
+
+      <div class="quick-actions will-animate">
+        <a href="login.html" class="btn">Login</a>
+        <a href="register.html" class="btn btn-primary">Register</a>
+      </div>
+    </main>
+  </div>
+
+  <div id="loading" class="loading-overlay" aria-hidden="true">
+    <div class="pan-loader" role="presentation">
+      <div class="pan-handle"></div>
+      <div class="pan-body">
+        <div class="bubble bubble-1"></div>
+        <div class="bubble bubble-2"></div>
+        <div class="bubble bubble-3"></div>
+      </div>
+      <div class="flame-container">
+        <div class="flame flame-1"></div>
+        <div class="flame flame-2"></div>
+        <div class="flame flame-3"></div>
+      </div>
+    </div>
+    <p class="loading-text">Whisking up delicious ideas…</p>
+  </div>
+
+  <div id="error-message" role="alert"></div>
+
+  <div id="auth-section" style="display:none;"></div>
+
+  <div id="app-section" class="dashboard-shell" style="display:none;">
+    <header class="dashboard-header">
+      <div class="header-left">
+        <h1>AI-Based Smart Food Waste Management</h1>
+        <p>Reduce waste through precise ingredient planning</p>
+      </div>
+      <div class="header-actions">
+        <input type="file" id="pdf-upload-input" accept="application/pdf" hidden>
+        <button id="pdf-upload-btn" class="cta-upload">Upload Recipe PDF</button>
+      </div>
+    </header>
+
+    <div class="welcome-banner">
+      <span id="welcome-text">Welcome Back!</span>
+    </div>
+
+    <nav class="nav-pills">
+      <button class="nav-btn active" data-target="search-section">Search Dish</button>
+      <button class="nav-btn" data-target="lists-section">My Lists</button>
+      <button class="nav-btn" data-target="profile-section">Profile</button>
+      <button class="nav-btn logout" type="button" data-action="logout">Logout</button>
+    </nav>
+
+    <div class="content-grid">
+      <section id="search-section" class="section active" data-section>
+        <div class="panel">
+          <h2>Search for a Dish</h2>
+          <div class="search-tabs">
+            <button type="button" class="tab-btn active" data-mode="name">Search by Name</button>
+            <button type="button" class="tab-btn" data-mode="url">Enter Recipe URL</button>
+          </div>
+          <form id="dish-search-form" data-method="name">
+            <div class="form-row">
+              <label for="dish-name">Dish Name</label>
+              <input id="dish-name" type="text" placeholder="e.g., Biryani, Pasta, Curry" autocomplete="off" required>
+              <small>Enter the name of the dish you want to cook. We&rsquo;ll search Google for the recipe!</small>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">Search Recipe</button>
+            </div>
+          </form>
+
+          <form id="recipe-url-form" data-method="url" style="display:none;">
+            <div class="form-row">
+              <label for="recipe-url">Recipe URL</label>
+              <input id="recipe-url" type="url" placeholder="https://example.com/your-favourite-recipe"
+                autocomplete="off">
+              <small>Paste a direct recipe link and we will extract the ingredients &amp; steps.</small>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">Extract Recipe</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="panel">
+          <h2>Recipe Details</h2>
+          <div id="recipe-results" class="results-container"></div>
+        </div>
+      </section>
+
+      <section id="lists-section" class="section" data-section>
+        <div class="panel">
+          <h2>Saved Grocery Lists</h2>
+          <div id="grocery-lists"></div>
+        </div>
+      </section>
+
+      <section id="profile-section" class="section" data-section>
+        <div class="panel">
+          <h2>Household Profile</h2>
+          <form id="profile-form">
+            <div class="form-row">
+              <label for="profile-household">Household Size</label>
+              <input id="profile-household" type="number" min="1" step="1" value="1" required>
+            </div>
+            <div class="form-row">
+              <label for="profile-dietary">Dietary Preferences</label>
+              <textarea id="profile-dietary" rows="3" placeholder="e.g., vegetarian, gluten-free"></textarea>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">Save Profile</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="panel">
+          <h2>Favourite Dishes</h2>
+          <div id="favorite-dishes"></div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    // Fetch random cooking video from Pexels API or local fallback
+    async function loadLoaderVideo() {
+      try {
+        const cookingKeywords = ['cooking', 'frying', 'baking', 'food preparation'];
+        const randomKeyword = cookingKeywords[Math.floor(Math.random() * cookingKeywords.length)];
+
+        // Using Pexels API - get a free key from pexels.com/api
+        const configuredKey = window.PEXELS_API_KEY || 'YOUR_PEXELS_API_KEY';
+        if (!configuredKey || configuredKey === 'YOUR_PEXELS_API_KEY') {
+          throw new Error('Pexels API key not configured');
+        }
+
+        const response = await fetch(`https://api.pexels.com/videos/search?query=${randomKeyword}&per_page=1`, {
+          headers: { 'Authorization': configuredKey }
+        });
+
+        if (!response.ok) {
+          throw new Error(`Pexels API returned ${response.status}`);
+        }
+
+        const data = await response.json();
+        if (data.videos && data.videos[0]) {
+          const videoFile = data.videos[0].video_files.find(f => f.quality === 'hd') || data.videos[0].video_files[0];
+          if (videoFile) {
+            document.getElementById('loaderSource').src = videoFile.link;
+            return;
+          }
+        }
+        throw new Error('No suitable video returned from Pexels');
+      } catch (error) {
+        // Fallback to local video
+        console.log('Using fallback video', error?.message || error);
+        document.getElementById('loaderSource').src = 'videos/cooking-loader.mp4';
+      }
+    }
+
+    // Load video on init
+    loadLoaderVideo();
+
+    window.addEventListener('load', function () {
+      var loader = document.getElementById('site-loader');
+      loader.classList.add('loaded');
+      setTimeout(function () {
+        if (loader && loader.parentNode) loader.parentNode.removeChild(loader);
+      }, 700);
+
+      var animated = document.querySelectorAll('.will-animate');
+      animated.forEach(function (el, idx) {
+        setTimeout(function () {
+          el.classList.add('animated-in');
+        }, 90 * idx + 120);
+      });
+    });
+  </script>
+
+  <script>
+    window.API_BASE_URL = 'http://localhost:5000/api';
+  </script>
+  <script src="js/utils.js" defer></script>
+  <script src="js/api.js" defer></script>
+  <script src="js/ui.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/pdfUpload.js" defer></script>
+
+</body>
+
+</html>

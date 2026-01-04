@@ -1,0 +1,11 @@
+/* responsive.css */
+@media (max-width: 1024px) {
+  .header { flex-direction:column; align-items:flex-start; gap:8px; padding:12px; }
+  .header-right { align-self:flex-end; }
+  .section { padding:20px; }
+}
+@media (max-width: 640px) {
+  .logo { font-size:1rem; }
+  .section-inner h2 { font-size:1.2rem; }
+  .nav { gap:8px; padding:6px; }
+}

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Smart Food - Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body class="auth-page">
+
+  <div id="auth-loader" class="auth-loader" aria-hidden="true">
+    <div class="pan-loader" role="presentation">
+      <div class="pan-handle"></div>
+      <div class="pan-body">
+        <div class="bubble bubble-1"></div>
+        <div class="bubble bubble-2"></div>
+        <div class="bubble bubble-3"></div>
+      </div>
+      <div class="flame-container">
+        <div class="flame flame-1"></div>
+        <div class="flame flame-2"></div>
+        <div class="flame flame-3"></div>
+      </div>
+    </div>
+    <p id="auth-loader-text" class="loader-caption">Warming up the kitchen…</p>
+  </div>
+
+  <header class="auth-topnav">
+    <div class="brand">Smart Food</div>
+    <nav>
+      <a href="index.html" class="nav-btn">Home</a>
+      <a href="register.html" class="nav-btn">Register</a>
+    </nav>
+  </header>
+
+  <main class="auth-wrapper">
+    <section class="auth-card animate-login" aria-labelledby="login-title">
+      <h1 id="login-title">Welcome Back</h1>
+      <p class="muted">Sign in to your Smart Food account</p>
+
+      <form id="loginForm" class="auth-form" autocomplete="on" novalidate>
+        <label class="field">
+          <span class="label-text">Email or Username</span>
+          <input id="login-identifier" name="identifier" type="text" required autocomplete="username" placeholder="you@example.com">
+        </label>
+
+        <label class="field">
+          <span class="label-text">Password</span>
+          <input id="login-password" name="password" type="password" required autocomplete="current-password" placeholder="Your password">
+        </label>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-large btn-primary">Sign In</button>
+          <a href="index.html" class="btn btn-ghost">Cancel</a>
+        </div>
+
+        <div id="loginMessage" role="status" aria-live="polite" class="form-msg"></div>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    window.API_BASE_URL = 'http://localhost:5000/api';
+  </script>
+  <script src="js/utils.js" defer></script>
+  <script src="js/auth.js" defer></script>
+</body>
+</html>

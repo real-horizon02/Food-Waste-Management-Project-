@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Smart Food Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body class="dashboard-theme">
+  <div id="loading" class="loading-overlay" aria-hidden="true">
+    <div class="pan-loader" role="presentation">
+      <div class="pan-handle"></div>
+      <div class="pan-body">
+        <div class="bubble bubble-1"></div>
+        <div class="bubble bubble-2"></div>
+        <div class="bubble bubble-3"></div>
+      </div>
+      <div class="flame-container">
+        <div class="flame flame-1"></div>
+        <div class="flame flame-2"></div>
+        <div class="flame flame-3"></div>
+      </div>
+    </div>
+    <p class="loading-text">Whisking up delicious ideas…</p>
+  </div>
+
+  <div id="error-message" role="alert"></div>
+
+  <!-- Expiry Alert Popup Modal -->
+  <div id="expiry-popup-modal" class="expiry-popup-overlay" style="display: none;">
+    <div class="expiry-popup-container">
+      <button class="expiry-popup-close" onclick="closeExpiryPopup()">&times;</button>
+      
+      <div class="expiry-popup-header">
+        <div class="expiry-popup-icon">🥦</div>
+        <h2>Watch Out! Food Alert</h2>
+        <p>Some items are expiring soon</p>
+      </div>
+      
+      <div id="expiry-popup-content" class="expiry-popup-content">
+        <!-- Items will be inserted here -->
+      </div>
+      
+      <div class="expiry-popup-footer">
+        <button class="btn-popup-secondary" onclick="closeExpiryPopup()">Dismiss</button>
+        <button class="btn-popup-primary" onclick="navigateToTracker()">View All Items</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="auth-section" style="display:none;"></div>
+
+  <!-- Video Background -->
+  <video id="dashboard-bg-video" class="dashboard-bg-video" autoplay muted loop playsinline>
+    <source src="videos/33257-396487989_small.mp4" type="video/mp4">
+  </video>
+
+  <div id="app-section" class="dashboard-shell">
+    <header class="dashboard-header">
+      <div class="header-left">
+        <h1>AI-Based Smart Food Waste Management</h1>
+        <p>Reduce waste through precise ingredient planning</p>
+      </div>
+    </header>
+
+    <div class="welcome-banner">
+      <span id="welcome-text">Welcome Back!</span>
+    </div>
+
+    <nav class="nav-pills">
+      <button class="nav-btn active" data-target="search-section">Search Dish</button>
+      <button class="nav-btn" data-target="lists-section">My Lists</button>
+      <button class="nav-btn" data-target="food-tracker-section">Food Tracker</button>
+      <button class="nav-btn" data-target="profile-section">Profile</button>
+      <button class="nav-btn logout" type="button" data-action="logout">Logout</button>
+    </nav>
+
+    <div class="content-grid">
+      <!-- ========== SEARCH DISH SECTION - RESPONSIVE 2-ROW LAYOUT ========== -->
+      <section id="search-section" class="section active" data-section>
+                <!-- SECTION 1: Plan Tonight's Dish - Centered Search -->
+        <div id="recipe-section-1" class="recipe-section recipe-section-1">
+          <div class="panel panel-search panel-search-centered">
+            <div class="panel-head">
+              <h2>Plan Tonight's Dish</h2>
+              <p>Search by dish name or drop in a recipe URL. We'll pull the ingredients, steps, and nutrition.</p>
+            </div>
+
+            <div class="search-tabs">
+              <button type="button" class="tab-btn active" data-mode="name">Search by Name</button>
+              <button type="button" class="tab-btn" data-mode="url">Enter Recipe URL</button>
+            </div>
+
+            <form id="dish-search-form" data-method="name" class="search-form">
+              <div class="form-row">
+                <label for="dish-name">Dish Name</label>
+                <input id="dish-name" type="text" placeholder="e.g., Biryani, Pasta, Curry, Kheer" autocomplete="off" required>
+                <small>We'll gather the full recipe, ingredients, and nutrition details.</small>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Search Recipe</button>
+              </div>
+            </form>
+
+            <form id="recipe-url-form" data-method="url" class="search-form" style="display:none;">
+              <div class="form-row">
+                <label for="recipe-url">Recipe URL</label>
+                <input id="recipe-url" type="url" placeholder="https://example.com/your-favourite-recipe"
+                  autocomplete="off">
+                <small>Paste a direct recipe link and we will extract the ingredients &amp; steps.</small>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Extract Recipe</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- SECTION 2: Recipe Details & Actions -->
+        <div id="recipe-section-2" class="recipe-section recipe-section-2" style="display:none;">
+          <div class="panel panel-results">
+            <div class="panel-head">
+              <h2>Recipe Details &amp; Actions</h2>
+              <p>Adjust servings, download PDFs, or build a smart grocery list.</p>
+            </div>
+            <div id="recipe-hint" class="recipe-placeholder">
+              <div class="placeholder-card">
+                <h3>Ready when you are</h3>
+                <p>Search for a dish or paste a recipe link to view the complete instructions, download PDFs, and generate a tailored grocery list.</p>
+                <ul>
+                  <li>Full ingredient list with quantities</li>
+                  <li>Step-by-step instructions</li>
+                  <li>Downloadable PDF for ingredients and recipe steps</li>
+                  <li>Smart grocery list scaled for your household</li>
+                </ul>
+              </div>
+            </div>
+            <div id="recipe-results" class="results-container" style="display:none;"></div>
+          </div>
+        </div>
+
+        <!-- SECTION 3: Instructions -->
+        <div id="recipe-section-3" class="recipe-section recipe-section-3" style="display:none;">
+          <div class="panel panel-instructions">
+            <div class="panel-head">
+              <h2>Cooking Instructions</h2>
+            </div>
+            <div id="recipe-instructions" class="recipe-instructions-content"></div>
+          </div>
+        </div>
+
+        <!-- SECTION 3B: Actions & Servings (below Instructions) -->
+        <div id="recipe-section-3b" class="recipe-section recipe-section-3b" style="display:none;">
+          <div class="panel panel-actions">
+            <div id="recipe-actions" class="recipe-actions-content"></div>
+          </div>
+        </div>
+
+        <!-- SECTION 4: Nutrition Information -->
+        <div id="recipe-section-4" class="recipe-section recipe-section-4" style="display:none;">
+          <div class="panel panel-nutrition">
+            <div class="panel-head">
+              <h2>Nutrition Information</h2>
+              <p>Per serving - accurate nutritional data for healthy meal planning</p>
+            </div>
+            <div id="recipe-nutrition" class="recipe-nutrition-content"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="lists-section" class="section" data-section>
+        <div class="panel">
+          <h2>Saved Grocery Lists</h2>
+          <div id="grocery-lists"></div>
+        </div>
+      </section>
+
+      <!-- ========== FOOD TRACKER SECTION ========== -->
+      <section id="food-tracker-section" class="section" data-section>
+        <div class="panel">
+          <h2>Food Tracker - Expiry Alerts</h2>
+          <p>Track your grocery items and receive alerts before they expire.</p>
+          
+          <div style="margin-top: 24px;">
+            <div style="display: flex; gap: 12px; margin-bottom: 24px;">
+              <button type="button" id="tracker-tab-qr" class="tracker-tab-btn active" onclick="switchTrackerTab('qr')">
+                Scan Me
+              </button>
+              <button type="button" id="tracker-tab-manual" class="tracker-tab-btn" onclick="switchTrackerTab('manual')">
+                Add Manually
+              </button>
+            </div>
+
+            <!-- QR Code Scanning Form (First/Default) -->
+            <div id="tracker-qr-form-container">
+              <h3 style="margin: 0 0 16px; font-size: 1.1rem; color: #ffffff;">Scan Product QR Code</h3>
+              <div style="margin-bottom: 16px;">
+                <div id="qr-scanner" style="
+                  width: 100%;
+                  max-width: 400px;
+                  margin: 0 auto 16px;
+                  border: 2px solid rgba(138, 97, 255, 0.3);
+                  border-radius: 12px;
+                  overflow: hidden;
+                  background: #000;
+                "></div>
+              </div>
+              <div style="text-align: center; margin-bottom: 20px;">
+                <p style="color: rgba(210, 220, 255, 0.8); font-size: 0.9rem; margin: 0;">
+                  Position your product barcode/QR code in front of your camera
+                </p>
+              </div>
+              <form id="qr-expiry-form" class="search-form" style="display: none;">
+                <div class="form-row">
+                  <label for="qr-product-name">Product Name</label>
+                  <input id="qr-product-name" type="text" placeholder="Scanned product name" required readonly>
+                </div>
+                <div class="form-row">
+                  <label for="qr-product-ean">Product Code (EAN/UPC)</label>
+                  <input id="qr-product-ean" type="text" placeholder="Product code" required readonly>
+                </div>
+                <div class="form-row">
+                  <label for="qr-expiry-date">Expiry Date</label>
+                  <input id="qr-expiry-date" type="date" required>
+                </div>
+                <div class="form-actions">
+                  <button type="submit" class="btn btn-primary">Save Scanned Item</button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Manual Entry Form (Second) -->
+            <div id="tracker-manual-form-container" style="display: none;">
+              <h3 style="margin: 0 0 16px; font-size: 1.1rem; color: #ffffff;">Add New Item</h3>
+              <form id="food-tracker-form" class="search-form">
+              <div class="form-row">
+                <label for="tracker-item-name">Item Name</label>
+                <input id="tracker-item-name" type="text" placeholder="e.g., Milk, Chicken, Tomatoes" autocomplete="off" required>
+              </div>
+              <div class="form-row">
+                <label for="tracker-expiry-date">Expiry Date</label>
+                <input id="tracker-expiry-date" type="date" required>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Add Item</button>
+              </div>
+            </form>
+            </div></div>
+
+          <div style="margin-top: 32px;">
+            <h3 style="margin: 0 0 16px; font-size: 1.1rem; color: #ffffff;">Tracked Items</h3>
+            <div id="food-tracker-items" class="results-container">
+              <div class="placeholder-card">
+                <h3>No items tracked yet</h3>
+                <p>Add items above to start tracking expiry dates.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="profile-section" class="section" data-section>
+        <div class="panel">
+          <h2>Household Profile</h2>
+          <form id="profile-form">
+            <div class="form-row">
+              <label for="profile-household">Household Size</label>
+              <input id="profile-household" type="number" min="1" step="1" value="1" required>
+            </div>
+            <div class="form-row">
+              <label for="profile-dietary">Dietary Preferences</label>
+              <textarea id="profile-dietary" rows="3" placeholder="e.g., vegetarian, gluten-free"></textarea>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">Save Profile</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="panel">
+          <h2>Favourite Dishes</h2>
+          <div id="favorite-dishes"></div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    window.API_BASE_URL = 'http://localhost:5000/api';
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.5/JsBarcode.all.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+  <script src="js/utils.js" defer></script>
+  <script src="js/api.js" defer></script>
+  <script src="js/ui.js" defer></script>
+  <script src="js/food-tracker.js" defer></script>
+  <script src="js/qr-scanner.js" defer></script>
+  <script src="js/expiry-alert-popup.js" defer></script>
+  <script src="js/ingredient_utils.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/pdfUpload.js" defer></script>
+</body>
+
+</html>

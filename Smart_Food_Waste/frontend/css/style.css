@@ -1,0 +1,118 @@
+:root{
+  --bg-900:#0f172a; --bg-800:#1e293b; --accent:#ff00ff; --accent-secondary:#00ffff; --accent-tertiary:#ff0080; --muted:#95a1b2;
+  --card:#12121a; --glass-border: rgba(255,255,255,0.04);
+  --radius:14px; --shadow: 0 10px 40px rgba(0,0,0,0.6);
+  --max-width:1080px;
+  --sans:'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:var(--sans);background: linear-gradient(180deg, #0a0e15, #0a1a2e, #0f1a35);color:#fff}
+a{color:inherit;text-decoration:none}
+.container{max-width:var(--max-width);margin:0 auto;padding:36px}
+
+/* top nav */
+.topnav{position:fixed;left:0;right:0;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:18px 36px;background:linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.12));backdrop-filter: blur(6px)}
+.topnav .brand{font-weight:700;font-size:1.2rem}
+.nav-links{display:flex;gap:12px;align-items:center;flex-wrap:nowrap}
+.nav-btn{padding:10px 20px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);font-weight:600;white-space:nowrap;min-width:fit-content;text-overflow:clip;overflow:visible}
+.nav-primary{background:var(--accent);border:none;color:#fff;padding:10px 24px;min-width:fit-content;text-overflow:clip;overflow:visible}
+
+/* hero */
+.hero-section{height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 20px}
+.hero-content h1{font-size:4.2rem;line-height:1;margin:0 0 12px;font-weight:800;letter-spacing:1px}
+.hero-sub{font-size:1.2rem;color:var(--muted);margin-bottom:22px}
+.cta{background:var(--accent);border:none;padding:14px 26px;border-radius:999px;color:#fff;font-weight:700;cursor:pointer}
+.cta-alt{background:transparent;border:2px solid rgba(255,255,255,0.12);padding:10px 18px}
+
+/* video section */
+.video-section{position:relative;height:100vh;overflow:hidden}
+.food-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.video-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.35))}
+.video-overlay h2{font-size:3rem;margin:0 0 10px}
+.video-overlay p{color:var(--muted);margin-bottom:18px}
+
+/* app intro / quick actions */
+.app-intro{padding:60px 20px;text-align:center}
+.quick-actions{display:flex;gap:12px;justify-content:center;margin-bottom:60px}
+.btn{padding:10px 14px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.06);color:#fff}
+.btn-primary{background:var(--accent);border:none;padding:10px 16px;font-weight:700}
+
+/* small screens */
+@media (max-width:720px){
+  .hero-content h1{font-size:2.2rem}
+  .video-overlay h2{font-size:1.4rem}
+  .topnav{padding:12px}
+}
+
+/* HERO image (paste at end of css/style.css) */
+/* ensure .hero-section exists in your HTML and wrap content in .hero-content */
+
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;                      /* behind the hero content */
+  background-image: url("../pictures/pexels-samerdaboul-2233729.jpg"); /* <-- correct relative path */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  transform-origin: center;
+  filter: brightness(0.55) saturate(0.98); /* darken for readability */
+  transition: transform 12s ease, filter 600ms ease;
+  will-change: transform;
+  animation: hero-zoom 20s ease-in-out infinite alternate;
+}
+
+/* subtle overlay for extra contrast */
+.hero-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(180deg, rgba(6,8,14,0.22) 10%, rgba(6,8,14,0.45) 60%, rgba(6,8,14,0.6) 100%);
+  pointer-events: none;
+}
+
+/* keep content above overlays */
+.hero-section .hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* small slow zoom */
+@keyframes hero-zoom {
+  from { transform: scale(1) translateY(0); }
+  to   { transform: scale(1.06) translateY(-3px); }
+}
+
+/* respect user's reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .hero-section::before { animation: none !important; transition: none !important; }
+}
+
+/* overlay gradient for better contrast on all screens (additional) */
+.hero-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0; /* sits above the image but below content */
+  background: linear-gradient(180deg, rgba(6,8,14,0.25) 10%, rgba(6,8,14,0.45) 60%, rgba(6,8,14,0.6) 100%);
+  pointer-events: none;
+}
+
+/* ensure hero content stays above overlays */
+.hero-section .hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* accessibility: respects reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .hero-section::before { animation: none !important; transition: none !important; }
+}

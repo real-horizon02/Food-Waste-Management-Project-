@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Smart Food - Register</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body class="auth-page">
+
+  <div id="auth-loader" class="auth-loader" aria-hidden="true">
+    <div class="pan-loader" role="presentation">
+      <div class="pan-handle"></div>
+      <div class="pan-body">
+        <div class="bubble bubble-1"></div>
+        <div class="bubble bubble-2"></div>
+        <div class="bubble bubble-3"></div>
+      </div>
+      <div class="flame-container">
+        <div class="flame flame-1"></div>
+        <div class="flame flame-2"></div>
+        <div class="flame flame-3"></div>
+      </div>
+    </div>
+    <p id="auth-loader-text" class="loader-caption">Crafting your account…</p>
+  </div>
+
+  <header class="auth-topnav">
+    <div class="brand">Smart Food</div>
+    <nav>
+      <a href="index.html" class="nav-btn">Home</a>
+      <a href="login.html" class="nav-btn">Login</a>
+    </nav>
+  </header>
+
+  <main class="auth-wrapper">
+    <section class="auth-card animate-register" aria-labelledby="register-title">
+      <h1 id="register-title">Create an Account</h1>
+      <p class="muted">Register to start planning your groceries and reducing waste.</p>
+
+      <form id="registerForm" class="auth-form" autocomplete="on" novalidate>
+        <label class="field">
+          <span class="label-text">Full name</span>
+          <input id="reg-name" name="name" type="text" required placeholder="Your full name">
+        </label>
+
+        <label class="field">
+          <span class="label-text">Email</span>
+          <input id="reg-email" name="email" type="email" required placeholder="you@example.com">
+        </label>
+
+        <label class="field">
+          <span class="label-text">Password</span>
+          <input id="reg-password" name="password" type="password" required minlength="6" placeholder="Choose a secure password">
+        </label>
+
+        <label class="field">
+          <span class="label-text">Household Size</span>
+          <input id="reg-household" name="household" type="number" min="1" value="1" required>
+        </label>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-large btn-primary">Create Account</button>
+          <a href="index.html" class="btn btn-ghost">Cancel</a>
+        </div>
+
+        <div id="registerMessage" role="status" aria-live="polite" class="form-msg"></div>
+      </form>
+
+      <div class="auth-footer">
+        <small>By creating an account you agree to our Terms of Use.</small>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    window.API_BASE_URL = 'http://localhost:5000/api';
+  </script>
+  <script src="js/utils.js" defer></script>
+  <script src="js/auth.js" defer></script>
+</body>
+</html>
