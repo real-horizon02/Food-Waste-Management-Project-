@@ -54,16 +54,18 @@ Expiry alerts triggered → Recipe recommendations generated → User feedback c
 ## 📸 Screenshots
 
 ### 1. Homepage - Welcome & Exploration
-![Homepage] <img width="2498" height="1322" alt="image" src="https://github.com/user-attachments/assets/b9d3f537-4e4a-46d9-816c-ccfaa3b9edad" />
+<img width="2498" height="1322" alt="image" src="https://github.com/user-attachments/assets/b9d3f537-4e4a-46d9-816c-ccfaa3b9edad" />
 
 > The landing page introduces the concept with a clean, inviting design. "Explore" button guides users to the main dashboard.
 
 ### 2. Kitchen Hub - Feature Overview
-![Kitchen Hub](./Screenshots/Screenshot%202025-11-26%20140632.png)
+<img width="2486" height="1427" alt="image" src="https://github.com/user-attachments/assets/d07b250d-2fb1-499b-922e-e26663a9d0e6" />
+
 > "Smarter Kitchens. Zero Waste." messaging with quick access to start managing pantry and recipes.
 
 ### 3. Dashboard - User Control Center
-![Dashboard](./Screenshots/Screenshot%202025-11-26%20140641.png)
+<img width="934" height="509" alt="image" src="https://github.com/user-attachments/assets/0f8084ba-06ba-420a-9a11-9d0b40e1ea1e" />
+
 > User "qwertyu" logged in. Main hub showing:
 > - Search Dish (recipe discovery)
 > - My Lists (grocery lists)
@@ -71,11 +73,13 @@ Expiry alerts triggered → Recipe recommendations generated → User feedback c
 > - Profile (household settings)
 
 ### 4. Login Page - Secure Access
-![Login](./Screenshots/Screenshot%202025-11-26%20140659.png)
+<img width="1692" height="1140" alt="image" src="https://github.com/user-attachments/assets/78535451-15dc-498e-a513-81f7bbf8c44e" />
+
 > Email/password authentication with MongoDB backend. Multi-user household support.
 
 ### 5. Profile Page - Personalization
-![Profile](./Screenshots/Screenshot%202025-11-26%20140710.png)
+<img width="1524" height="683" alt="image" src="https://github.com/user-attachments/assets/26e4c5e1-fc37-4558-9060-acdc8d5a69e4" />
+
 > User preferences including:
 > - Household size (affects serving calculations)
 > - Dietary preferences (vegetarian, vegan, allergies, etc.)
