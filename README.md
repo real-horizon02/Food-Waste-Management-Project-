@@ -620,5 +620,4 @@ We welcome contributions! To contribute:
 
 **Built with ❤️ for sustainable food systems**
 
-*Last Updated: January 2025*
-*Status: Production Ready for Arjuna 2.0 Hackathon*
+*Last Updated: January 2026*
