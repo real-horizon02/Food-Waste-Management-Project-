@@ -54,7 +54,8 @@ Expiry alerts triggered → Recipe recommendations generated → User feedback c
 ## 📸 Screenshots
 
 ### 1. Homepage - Welcome & Exploration
-![Homepage](./Screenshots/Screenshot%202025-11-26%20140608.png)
+![Homepage] <img width="2498" height="1322" alt="image" src="https://github.com/user-attachments/assets/b9d3f537-4e4a-46d9-816c-ccfaa3b9edad" />
+
 > The landing page introduces the concept with a clean, inviting design. "Explore" button guides users to the main dashboard.
 
 ### 2. Kitchen Hub - Feature Overview
